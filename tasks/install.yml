@@ -12,3 +12,16 @@
     dest: "/opt/prometheus/"
     extra_opts: [--strip-components=1]
     creates: "/opt/prometheus/prometheus"
+- name: Create prometheus service
+  become: true
+  template:
+    src: templates/prometheus.service.j2
+    dest: "/etc/systemd/system/prometheus.service"
+  notify: restart prometheus
+- name: enable prometheus service
+  become: true
+  service:
+    name: prometheus
+    enabled: yes
+    masked: no
+  notify: restart prometheus
