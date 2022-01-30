@@ -1,0 +1,14 @@
+---
+- name: Create directrory for Prometheus
+  become: true
+  file:
+    state: directory
+    path: "/opt/prometheus"
+    owner: "{{ ansible_user_id }}"
+- name: Extract Prometheus in the installation directory
+  unarchive:
+    copy: false
+    src: "/tmp/prometheus-{{ prometheus_version }}.darwin-amd64.tar.gz"
+    dest: "/opt/prometheus/"
+    # extra_opts: [--strip-components=1]
+    creates: "/opt/prometheus/prometheus"

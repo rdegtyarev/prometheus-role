@@ -1,0 +1,4 @@
+---
+prometheus_version: "2.33.0"
+prometheus_install_type: remote
+{{ prometheus_home }}
