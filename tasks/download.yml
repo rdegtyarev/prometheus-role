@@ -1,14 +1,14 @@
 ---
 - name: "Download Prometheus tar"
   get_url:
-    url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.darwin-amd64.tar.gz"
-    dest: "files/prometheus-{{ prometheus_version }}.darwin-amd64.tar.gz"
+    url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+    dest: "files/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
   register: download_prometheus
   delegate_to: localhost
   until: download_prometheus is succeeded
   when: prometheus_install_type == 'remote'
 - name: Copy Prometheus to managed node
   copy:
-    src: "files/prometheus-{{ prometheus_version }}.darwin-amd64.tar.gz"
+    src: "files/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
     mode: 0755
-    dest: "/tmp/prometheus-{{ prometheus_version }}.darwin-amd64.tar.gz"
+    dest: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
